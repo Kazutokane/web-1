@@ -1,0 +1,765 @@
+<!doctype html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Grand Theft Auto San Andreas - README</title>
+
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+                    rel="stylesheet"
+                />
+                <script src="https://cdn.tailwindcss.com"></script>
+
+                <style>
+                    :root {
+                        --bg: #0a0a0a;
+                        --surface: #111111;
+                        --s2: #181818;
+                        --s3: #202020;
+                        --bd: #262626;
+                        --bd2: #333333;
+                        --accent: #ff6640;
+                        --as: rgba(255, 102, 64, 0.12);
+                        --ag: rgba(255, 102, 64, 0.25);
+                        --t1: #fff;
+                        --t2: #a1a1a1;
+                        --t3: #555;
+                    }
+
+                    *,
+                    *::before,
+                    *::after {
+                        box-sizing: border-box;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    html {
+                        scroll-behavior: smooth;
+                    }
+
+                    body {
+                        background: var(--bg);
+                        color: var(--t2);
+                        font-family: "Inter", sans-serif;
+                        font-size: 15px;
+                        line-height: 1.6;
+                        min-height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 2.5rem 1rem;
+                    }
+
+                    ::-webkit-scrollbar {
+                        width: 6px;
+                    }
+
+                    ::-webkit-scrollbar-track {
+                        background: var(--surface);
+                    }
+
+                    ::-webkit-scrollbar-thumb {
+                        background: var(--bd2);
+                        border-radius: 3px;
+                    }
+
+                    ::-webkit-scrollbar-thumb:hover {
+                        background: var(--t3);
+                    }
+
+                    .wrap {
+                        width: 100%;
+                        max-width: 820px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2rem;
+                    }
+
+                    header {
+                        text-align: center;
+                        padding: 1.5rem 0 0;
+                    }
+
+                    h1 {
+                        font-family: "Outfit", sans-serif;
+                        font-size: clamp(2.25rem, 6vw, 3.75rem);
+                        font-weight: 800;
+                        color: var(--t1);
+                        letter-spacing: -0.02em;
+                        line-height: 1.1;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    h1 em {
+                        color: var(--accent);
+                        font-style: normal;
+                    }
+
+                    .sub {
+                        color: var(--t3);
+                        font-size: 0.875rem;
+                        max-width: 380px;
+                        margin: 0 auto;
+                    }
+
+                    .tabs {
+                        display: flex;
+                        gap: 4px;
+                        background: var(--surface);
+                        border: 1px solid var(--bd);
+                        border-radius: 12px;
+                        padding: 4px;
+                        flex-wrap: wrap;
+                    }
+
+                    .tab-btn {
+                        flex: 1 1 auto;
+                        min-width: 120px;
+                        padding: 9px 16px;
+                        border-radius: 8px;
+                        border: 1px solid transparent;
+                        background: transparent;
+                        color: var(--t3);
+                        font-family: "Inter", sans-serif;
+                        font-size: 13px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.15s ease;
+                        text-align: center;
+                    }
+
+                    .tab-btn:hover {
+                        color: var(--t2);
+                    }
+
+                    .tab-btn.active {
+                        background: var(--s3);
+                        color: var(--t1);
+                        border-color: var(--bd2);
+                    }
+
+                    .card {
+                        background: var(--surface);
+                        border: 1px solid var(--bd);
+                        border-radius: 16px;
+                        overflow: hidden;
+                    }
+
+                    .card-hd {
+                        padding: 1.125rem 1.5rem;
+                        border-bottom: 1px solid var(--bd);
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+
+                    .hd-icon {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 7px;
+                        background: var(--as);
+                        border: 1px solid var(--ag);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                        color: var(--accent);
+                    }
+
+                    .ct {
+                        font-family: "Outfit", sans-serif;
+                        font-size: 0.9375rem;
+                        font-weight: 700;
+                        color: var(--t1);
+                        letter-spacing: -0.01em;
+                    }
+
+                    .card-body {
+                        padding: 1.5rem;
+                    }
+
+                    .panel {
+                        display: none;
+                    }
+
+                    .panel.active {
+                        display: block;
+                    }
+
+                    .steps {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1px;
+                        background: var(--bd);
+                        border-radius: 12px;
+                        overflow: hidden;
+                    }
+
+                    .step {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 1rem;
+                        padding: 1.125rem 1.25rem;
+                        background: var(--s2);
+                        transition: background 0.15s ease;
+                    }
+
+                    .step:hover {
+                        background: var(--s3);
+                    }
+
+                    .sn {
+                        width: 26px;
+                        height: 26px;
+                        border-radius: 6px;
+                        background: var(--s3);
+                        border: 1px solid var(--bd2);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: "JetBrains Mono", monospace;
+                        font-size: 10px;
+                        font-weight: 500;
+                        color: var(--t3);
+                        flex-shrink: 0;
+                        margin-top: 2px;
+                    }
+
+                    .sb {
+                        flex: 1;
+                    }
+
+                    .sb p {
+                        color: var(--t2);
+                        font-size: 0.875rem;
+                        line-height: 1.65;
+                    }
+
+                    .hint {
+                        color: var(--t3) !important;
+                        font-size: 0.8125rem !important;
+                        margin-top: 0.35rem;
+                    }
+
+                    b {
+                        color: var(--t1);
+                        font-weight: 600;
+                    }
+
+                    code {
+                        font-family: "JetBrains Mono", monospace;
+                        font-size: 11.5px;
+                        font-weight: 500;
+                        background: var(--s3);
+                        border: 1px solid var(--bd2);
+                        color: var(--accent);
+                        padding: 2px 6px;
+                        border-radius: 5px;
+                    }
+
+                    .cmd {
+                        display: block;
+                        margin-top: 0.75rem;
+                        background: var(--bg);
+                        border: 1px solid var(--bd);
+                        border-radius: 10px;
+                        padding: 0.875rem 1rem;
+                        font-family: "JetBrains Mono", monospace;
+                        font-size: 12px;
+                        color: var(--t2);
+                        overflow-x: auto;
+                        white-space: nowrap;
+                        line-height: 1.5;
+                    }
+
+                    .hash-box {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        background: var(--s2);
+                        border: 1px solid var(--bd);
+                        border-radius: 12px;
+                        padding: 1rem 1.25rem;
+                        margin-top: 1.25rem;
+                    }
+
+                    .hl {
+                        font-family: "JetBrains Mono", monospace;
+                        font-size: 9px;
+                        font-weight: 500;
+                        letter-spacing: 0.2em;
+                        text-transform: uppercase;
+                        color: var(--t3);
+                        white-space: nowrap;
+                    }
+
+                    .hv {
+                        font-family: "JetBrains Mono", monospace;
+                        font-size: 11.5px;
+                        font-weight: 500;
+                        color: var(--t2);
+                        word-break: break-all;
+                        flex: 1;
+                    }
+
+                    .intro {
+                        color: var(--t2);
+                        font-size: 0.875rem;
+                        line-height: 1.65;
+                        margin-bottom: 1.25rem;
+                    }
+
+                    footer {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 1.25rem;
+                        padding: 1.5rem 0;
+                        border-top: 1px solid var(--bd);
+                        width: 100%;
+                    }
+
+                    .fh {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.625rem;
+                        min-width: 0;
+                    }
+
+                    .fh .hv {
+                        font-size: 11px;
+                        color: var(--t3);
+                    }
+
+                    .discord {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        background: var(--accent);
+                        color: #fff;
+                        font-family: "Inter", sans-serif;
+                        font-size: 13px;
+                        font-weight: 600;
+                        padding: 10px 22px;
+                        border-radius: 100px;
+                        text-decoration: none;
+                        transition:
+                            background 0.15s ease,
+                            box-shadow 0.15s ease;
+                        white-space: nowrap;
+                    }
+
+                    .discord:hover {
+                        background: #ff7a5c;
+                        box-shadow: 0 0 24px var(--ag);
+                    }
+
+                    @media (min-width: 600px) {
+                        footer {
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                    }
+                </style>
+            </head>
+
+            <body>
+                <div class="wrap">
+                    <header>
+                        <h1>Get Your Game <em>Running</em></h1>
+                        <p class="sub">Follow these steps for the best experience.</p>
+                    </header>
+
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="run">
+                            How to Run
+                        </button>
+                        <button class="tab-btn" data-tab="hash">Verify Download</button>
+                        <button class="tab-btn" data-tab="achievements">
+                            Achievements
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div id="panel-run" class="panel active">
+                            <div class="card-hd">
+                                <div class="hd-icon">
+                                    <svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                </div>
+                                <span class="ct">How to Run Grand Theft Auto San Andreas</span>
+                            </div>
+
+                            <div class="card-body">
+                                <span class="card-title">
+                                    <img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAfElEQVR4nO3VsQ3CMBBA0WtCzXoWYgPYgEFYBClLMAVVMgFK82go4aCwQZH8pSvtV1i2I3q1wgZb7HHCGRdcccMdM3bZJgOObxaX53xqzoAxWVi+BGTA0hrIKh2IXwClxsQ/gfWfwfqBpTUwtgYGHJo91xU+nCm9B7140QMdo5pjNnamTAAAAABJRU5ErkJggg=="
+                                        alt="windows-client"
+                                        style="
+                                            padding: 2px;
+                                            margin: 0 0 2px 2px;
+                                            height: 22px;
+                                            display: inline-block;
+                                        "
+                                    />
+                                    Windows</span
+                                >
+
+                                <div class="steps">
+                                    <div class="step">
+                                        <div class="sn">01</div>
+                                        <div class="sb">
+                                            <p>
+                                                To avoid errors like
+                                                <b>"No License"</b> or missing files,
+                                                <b
+                                                    >disable your antivirus / Windows
+                                                    Defender</b
+                                                >, then
+                                                <b>re-extract the files with WinRAR</b>.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">02</div>
+                                        <div class="sb">
+                                            <p>
+                                                Install all programs in the
+                                                <b>Common Redist</b> folder for full
+                                                compatibility.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">03</div>
+                                        <div class="sb">
+                                            <p>
+                                                Navigate to
+                                                <code>gta_sa.exe</code>
+                                                and <b>run it as Administrator</b>.
+                                            </p>
+                                            <p class="hint">
+                                                Running as administrator resolves most
+                                                save-file and permission issues.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <span class="card-title">
+                                    <img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADgUlEQVR4nO2ZS0hWURDHLR/ZQ6isTDPaZ9AiNIqI6LGppEUYKm3amiIJPojeoUXLslBaVZtAayNFLawIrW1pUVRQRg/QctHzs6BfDMzicLn3fvfec/xq8f3hoN57zsx/zp0zM2fMyckiiyysAcwE1gMHgevAE2AS+KVjUp9d0znrgNz/gfhy4AzwjviQNadFxr8gvhjo1d21xRTQAyzKFPl6dQnX+ATUTSfxfOAi049e0eWa/GzgNpnDTWCOK/KzgFsOSI0CzUAFMFdHhT6Td17ccPIl9JPaHtIGCbUhOnKBRp1roseW/F4H5DfH0LfFx4japORLNDLYoMEjcxdwD/im4y5Q7ZnT5JExARQnMeCCJflRM9tq0gpCp8edJGubOB+X/AoHSarZs/OCFNAKlOpoM1xmpzH/gEeWrCuPY0AX9lhpyBO3EbT66GrXd3eMZ6t85J2KU5h9dGBAkSHzqz4r9dFXpu++GM+KfOS9DYtkpsC1uEGhYwMEVVEMkHLXFv0emRJtBG0++jr03WAaFxJ0RDGg35L8OLDEI7PaOIxtuusy2o1DvMOY3xIguy+KASOWBuwJkNsZsuakJ4w+DZg3GsUASRxJEbpDEiol2uiZkDFo7rzOkdooCBNRDKgCrvik9NiuExfA1jT5JxVH2FLgCPAhogE1FsTzdOfTJc9UEuEFclMCHnqE3Rd/18MY+4IOzNNo0xLi8/FdKI3SSuAysN9CxmrgNckwYmWAD5l9wHPgJ/AKOC63t5D5u42klgR9UTsO+RbuNew1ApgBHAP+YIf2KKTEL98Dh+JEFWAjMKaKjnp8XRpaLlAZlcwzI3NeAtZEXLdN1700vtBjR+THIhVzqviEj4DhdNHGKMJShgGu0BWJvCou1SufF2VGc6sk4E4reKF/lzsinwKWRTYgpHapNSrIlIbUDdoi2QS80XlHDENd4Fws8qp8vs+lfsjo0kkd44chuQto5HnggPw4sDC2AUYZ7A19jYZ/S2n8CPghB1dLj8KA7kJS1CQiH9JN+B2WiXXnm3SeLbqtyBuF1kBAVKrTg1qgP+sduQ2qM8/aAMPnr5I5DDhr7npuSt0ZIN/tbOcDDNmupYZrjFsf2BhGLADOAt8dEE9JnE8cKi0NKQYOJ/wnnzSqumJn2OmCtBI1fPZrY/ezhtIp/V2Kuj5tpVRGLsyyyCKLnDD8BQFlVhg8OupnAAAAAElFTkSuQmCC"
+                                        alt="steam-circled"
+                                        style="
+                                            padding: 2px;
+                                            margin: 0 0 2px 2px;
+                                            height: 22px;
+                                            display: inline-block;
+                                        "
+                                    />
+                                    Linux/SteamOS</span
+                                >
+
+                                <div class="steps">
+                                    <div class="step">
+                                        <div class="sn">01</div>
+                                        <div class="sb">
+                                            <p>
+                                                Open a terminal in the extracted folder
+                                                and make the bundled launchers
+                                                executable:
+                                            </p>
+                                            <code class="cmd">
+                                                chmod +x launch_proton.sh
+                                                launch_wine.sh
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">02</div>
+                                        <div class="sb">
+                                            <p>
+                                                Run <code>./launch_proton.sh</code> —
+                                                it automatically finds
+                                                <b>GE-Proton</b>,
+                                                <b>Proton Experimental</b>, or regular
+                                                <b>Proton</b> from your Steam install.
+                                                Prefer plain Wine? Use
+                                                <code>./launch_wine.sh</code> instead.
+                                            </p>
+                                            <p class="hint">
+                                                If no Proton is found, install GE-Proton
+                                                or Proton Experimental through Steam or
+                                                ProtonUp-Qt.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">03</div>
+                                        <div class="sb">
+                                            <p>
+                                                Need launch arguments? Edit the
+                                                <code>LAUNCH_OPTIONS=</code> line at the
+                                                top of <code>launch_proton.sh</code>.
+                                            </p>
+                                            <p class="hint">
+                                                Do <b>not</b> add
+                                                <code>%command%</code> — that token only
+                                                works inside Steam. The launcher runs
+                                                your options without it.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="panel-hash" class="panel">
+                            <div class="card-hd">
+                                <div class="hd-icon">
+                                    <svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                        />
+                                        <polyline points="9 12 11 14 15 10" />
+                                    </svg>
+                                </div>
+                                <span class="ct">Verify Your Download</span>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="intro">
+                                    A hash is a digital fingerprint. Matching it against
+                                    ours confirms your file is complete and untampered.
+                                </p>
+
+                                <div class="steps">
+                                    <div class="step">
+                                        <div class="sn">01</div>
+                                        <div class="sb">
+                                            <p>
+                                                Press <b>Win + R</b>, type
+                                                <code>powershell</code>, and press
+                                                Enter.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">02</div>
+                                        <div class="sb">
+                                            <p>
+                                                Run the command below — update the path
+                                                to where you extracted the game.
+                                            </p>
+
+                                            <p class="hint">
+                                                (e.g.
+                                                C:\Users\You\Downloads\gta_sa.exe)
+                                            </p>
+
+                                            <code class="cmd">
+                                                Get-FileHash -Path "gta_sa.exe"
+                                                -Algorithm MD5
+                                            </code>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">03</div>
+                                        <div class="sb">
+                                            <p>
+                                                If the output matches the hash below,
+                                                your download is intact.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="hash-box">
+                                    <span class="hl">MD5</span>
+                                    <span class="hv" id="hp">25405921d1c47747fd01fd0bfe0a05ae</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="panel-achievements" class="panel">
+                            <div class="card-hd">
+                                <div class="hd-icon">
+                                    <svg
+                                        width="15"
+                                        height="15"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <circle cx="12" cy="8" r="5" />
+                                        <path d="M4 20v-1a8 8 0 0 1 16 0v1" />
+                                    </svg>
+                                </div>
+
+                                <span class="ct">Enable Achievements & Overlay</span>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="intro">
+                                    To unlock achievements and enable the in-game
+                                    overlay, follow these quick steps:
+                                </p>
+
+                                <div class="steps">
+                                    <div class="step">
+                                        <div class="sn">01</div>
+                                        <div class="sb">
+                                            <p>
+                                                Navigate to your game folder and locate
+                                                <code>SOVEREIGN.ini</code>.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">02</div>
+                                        <div class="sb">
+                                            <p>
+                                                Open <code>SOVEREIGN.ini</code> with a
+                                                text editor.
+                                            </p>
+
+                                            <p>Find the line:</p>
+                                            <code class="cmd">Overlay=0</code>
+
+                                            <p>Change it to:</p>
+                                            <code class="cmd">Overlay=1</code>
+
+                                            <p class="hint">
+                                                Save the file after editing.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="step">
+                                        <div class="sn">03</div>
+                                        <div class="sb">
+                                            <p>
+                                                Launch the game and ensure your display
+                                                mode is set to:
+                                            </p>
+
+                                            <p>
+                                                <b>✓ Borderless Windowed</b> or
+                                                <b>✓ Windowed</b>
+                                            </p>
+
+                                            <p class="hint">
+                                                Fullscreen mode disables the overlay
+                                                entirely.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="hash-box"
+                                    style="
+                                        margin-top: 1.5rem;
+                                        background: var(--as);
+                                        border-color: var(--ag);
+                                    "
+                                >
+                                    <span class="hl" style="color: var(--accent)"
+                                        >Tip</span
+                                    >
+
+                                    <span class="hv" style="color: var(--t2)">
+                                        Restart the game completely after enabling the
+                                        overlay.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer>
+                        <div class="fh">
+                            <span class="hl">MD5</span>
+                            <span class="hv">25405921d1c47747fd01fd0bfe0a05ae</span>
+                        </div>
+
+                        <a
+                            href="https://discord.gg/ZxfHKtC9Ba"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="discord"
+                        >
+                            <svg
+                                width="15"
+                                height="15"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                            >
+                                <path
+                                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.079.113 18.1.133 18.113a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"
+                                />
+                            </svg>
+
+                            Join Discord for Support
+                        </a>
+                    </footer>
+                </div>
+
+                <script>
+                    document.querySelectorAll(".tab-btn").forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            const target = btn.dataset.tab;
+
+                            document
+                                .querySelectorAll(".tab-btn")
+                                .forEach((b) => b.classList.remove("active"));
+
+                            document
+                                .querySelectorAll(".panel")
+                                .forEach((p) => p.classList.remove("active"));
+
+                            btn.classList.add("active");
+
+                            document
+                                .getElementById(`panel-${target}`)
+                                .classList.add("active");
+                        });
+                    });
+                </script>
+            </body>
+        </html>
